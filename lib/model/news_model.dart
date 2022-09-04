@@ -1,5 +1,7 @@
-class News {
-  News({
+import 'package:intl/intl.dart';
+
+class NewsResponse {
+  NewsResponse({
     required this.status,
     required this.totalResults,
     required this.articles,
@@ -8,7 +10,7 @@ class News {
   late final int totalResults;
   late final List<Articles> articles;
 
-  News.fromJson(Map<String, dynamic> json){
+  NewsResponse.fromJson(Map<String, dynamic> json){
     status = json['status'];
     totalResults = json['totalResults'];
     articles = List.from(json['articles']).map((e)=>Articles.fromJson(e)).toList();
@@ -49,8 +51,10 @@ class Articles {
     title = json['title'];
     description = null;
     url = json['url'];
-    urlToImage = null;
-    publishedAt = json['publishedAt'];
+    urlToImage = json['urlToImage'];
+    publishedAt = DateFormat("dd/MM/yyyy hh:mm").format(
+      DateTime.parse(json['publishedAt']),
+    );
     content = null;
   }
 
